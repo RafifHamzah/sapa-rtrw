@@ -4,7 +4,7 @@ FROM php:8.3-cli
 
 # Ekstensi PHP yang dibutuhkan Laravel + Filament.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev libonig-dev \
+        git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev libonig-dev libsqlite3-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" pdo_sqlite mbstring gd zip bcmath exif \
     && rm -rf /var/lib/apt/lists/*
