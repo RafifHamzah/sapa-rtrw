@@ -133,7 +133,41 @@ php artisan view:cache
 
 ---
 
-## 6. Web server (document root)
+## 5b. 🚂 Deploy cepat via Railway (rekomendasi — dipakai untuk submission)
+
+Railway menjalankan Laravel langsung dari GitHub tanpa perlu setup server manual.
+
+1. **railway.app** → Login with GitHub → **New Project** → **Deploy from GitHub repo** → pilih repo `sapa-rtrw`.
+2. Tab **Variables** → Raw Editor, paste:
+   ```
+   APP_NAME=SAPA
+   APP_ENV=production
+   APP_DEBUG=false
+   APP_KEY=base64:GENERATE_SENDIRI        # php artisan key:generate --show
+   APP_URL=https://TEMP.up.railway.app     # ganti setelah dapat domain (langkah 5)
+   DB_CONNECTION=sqlite
+   DB_DATABASE=/app/database/database.sqlite
+   SESSION_DRIVER=database
+   CACHE_STORE=database
+   QUEUE_CONNECTION=database
+   FILESYSTEM_DISK=public
+   LOG_CHANNEL=stderr
+   ```
+   Tambahkan juga (opsional): `MIDTRANS_SERVER_KEY`, `MIDTRANS_CLIENT_KEY`, `MIDTRANS_MERCHANT_ID`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`.
+3. Settings → Deploy → **Pre-deploy Command**:
+   ```
+   php artisan migrate --force --seed && php artisan storage:link
+   ```
+4. Tunggu build selesai (Railway auto-build: composer install + serve public/).
+5. Settings → Networking → **Generate Domain** → salin URL → set `APP_URL` ke URL itu → redeploy.
+6. Buka URL → landing SAPA muncul → **inilah link "Web Hosting"** untuk submission.
+7. Update Payment Notification URL (Midtrans) & Authorized redirect URI (Google) ke domain Railway.
+
+> Catatan: SQLite di Railway bersifat **ephemeral** (data ke-reset tiap redeploy, lalu di-seed ulang otomatis) — cukup untuk demo penjurian. Untuk data permanen, tambahkan plugin **MySQL/Postgres** Railway lalu petakan `DB_*` ke variabel plugin, dan hapus `--seed` dari pre-deploy setelah seed pertama.
+
+---
+
+## 6. Web server (document root) — untuk VPS/cPanel manual (lewati jika pakai Railway)
 
 Arahkan document root ke folder **`public/`**, bukan root project.
 
