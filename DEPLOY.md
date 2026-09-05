@@ -11,7 +11,7 @@ Ikuti dari atas ke bawah. Butuh ± 20–30 menit.
 
 | Kebutuhan | Versi / Catatan |
 |---|---|
-| PHP | **8.3+** (ekstensi: `mbstring`, `openssl`, `pdo`, `sqlite3` atau `mysql`, `curl`, `fileinfo`, `gd`, `zip`, `bcmath`) |
+| PHP | **8.4+** (composer.lock mengunci Symfony 8.1 → butuh PHP ≥8.4.1; ekstensi: `mbstring`, `intl`, `openssl`, `pdo_sqlite`/`mysql`, `curl`, `fileinfo`, `gd`, `zip`, `bcmath`) |
 | Composer | 2.x |
 | Node.js + npm | 18+ (hanya untuk **build aset**, tidak perlu jalan permanen) |
 | Web server | Nginx / Apache dengan document root ke folder **`public/`** |

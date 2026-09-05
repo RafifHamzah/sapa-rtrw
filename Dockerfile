@@ -1,6 +1,7 @@
 # SAPA — image produksi untuk Railway / host Docker apa pun.
 # Aset (public/build) sudah di-commit, jadi TIDAK butuh Node/npm saat build.
-FROM php:8.3-cli
+# PHP 8.4: composer.lock mengunci komponen Symfony 8.1 yang butuh php >=8.4.1.
+FROM php:8.4-cli
 
 # Ekstensi PHP yang dibutuhkan Laravel + Filament.
 RUN apt-get update && apt-get install -y --no-install-recommends \
