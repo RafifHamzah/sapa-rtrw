@@ -115,6 +115,10 @@ Pengelolaan RT/RW di Indonesia masih banyak dilakukan secara manual, dan menimbu
 
 > Screenshot lain (iuran + Midtrans, verifikasi QR publik, lapor warga, mode inklusif) tersedia di folder [`docs/screenshots/`](docs/screenshots).
 
+### 🎥 Video Demo
+
+📹 **[Tonton Video Demo Lengkap](docs/sapa-demo.mp4)** — klik untuk memutar langsung di GitHub. Video ini menampilkan seluruh alur dan fitur SAPA dari sisi warga maupun pengurus.
+
 ---
 
 ## 🛠 Teknologi

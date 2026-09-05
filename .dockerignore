@@ -6,6 +6,7 @@ tests
 .env
 .env.*
 *.md
+docs
 database/*.sqlite
 storage/logs/*
 .DS_Store
