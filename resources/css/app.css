@@ -1,0 +1,490 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+
+    html {
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-slate-50 text-slate-800;
+    }
+
+    h1, h2, h3, h4 {
+        @apply font-display tracking-tight text-slate-900;
+    }
+}
+
+@layer components {
+    /* Kartu dasar dipakai lintas komponen. */
+    .card-surface {
+        @apply bg-white rounded-2xl shadow-card ring-1 ring-slate-100;
+    }
+
+    /* Field form konsisten (dipakai form warga). */
+    .field-input {
+        @apply w-full rounded-xl border-slate-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 text-slate-800 placeholder:text-slate-400;
+    }
+}
+
+/*
+ | Mode Inklusif (pembeda tema "Inclusive Society"):
+ | .inclusive di <html> memperbesar font & menaikkan kontras untuk lansia.
+ */
+html.inclusive {
+    font-size: 118%;
+}
+
+html.inclusive body {
+    @apply text-slate-900;
+}
+
+html.inclusive .card-surface {
+    @apply ring-2 ring-slate-300;
+}
+
+html.inclusive a,
+html.inclusive button {
+    text-underline-offset: 2px;
+}
+
+/* =========================================================
+ | Polish visual (Glassmorphism, animasi, loader, toast)
+ ========================================================= */
+
+@layer components {
+    /* Glass card: kaca buram premium. */
+    .glass {
+        @apply bg-white/70 backdrop-blur-xl ring-1 ring-white/60 shadow-card;
+    }
+    .glass-nav {
+        @apply bg-white/70 backdrop-blur-xl;
+    }
+}
+
+/* Micro-interaction: semua tombol & link-tombol menekan halus. */
+button, .btn, [role="button"] {
+    transition: transform 0.12s ease;
+}
+button:active, .btn:active, [role="button"]:active {
+    transform: scale(0.97);
+}
+
+/* Scroll reveal
+ | Progressive enhancement: elemen HANYA disembunyikan bila <html> punya class .js
+ | (ditambahkan lebih awal oleh JS). Tanpa JS / JS gagal → konten tetap tampil final. */
+[data-reveal] {
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+}
+html.js [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+}
+
+/* Varian arah entrance — pakai observer yang sama, JS cukup toggle .is-revealed */
+html.js [data-reveal="left"]   { transform: translateX(-24px); }
+html.js [data-reveal="right"]  { transform: translateX(24px); }
+html.js [data-reveal="scale"]  { transform: scale(0.92); }
+html.js [data-reveal="grow-x"] { transform: scaleX(0); transform-origin: left center; }
+html.js [data-reveal="left"].is-revealed,
+html.js [data-reveal="right"].is-revealed,
+html.js [data-reveal="scale"].is-revealed,
+html.js [data-reveal="grow-x"].is-revealed { transform: none; }
+
+/* Stagger anak-anak dalam blok ter-reveal (mis. daftar masalah/solusi).
+ | Muncul bertahap SETELAH kartu induknya ter-reveal. Reusable via class .reveal-stagger. */
+html.js [data-reveal] .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+html.js [data-reveal].is-revealed .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+}
+html.js [data-reveal].is-revealed .reveal-stagger > *:nth-child(1) { transition-delay: 0.12s; }
+html.js [data-reveal].is-revealed .reveal-stagger > *:nth-child(2) { transition-delay: 0.19s; }
+html.js [data-reveal].is-revealed .reveal-stagger > *:nth-child(3) { transition-delay: 0.26s; }
+html.js [data-reveal].is-revealed .reveal-stagger > *:nth-child(4) { transition-delay: 0.33s; }
+html.js [data-reveal].is-revealed .reveal-stagger > *:nth-child(5) { transition-delay: 0.40s; }
+html.js [data-reveal].is-revealed .reveal-stagger > *:nth-child(6) { transition-delay: 0.47s; }
+
+/* Animated gradient background (hero) */
+.animated-gradient {
+    background: linear-gradient(120deg, #ecfdf5, #d1fae5, #ffffff, #a7f3d0);
+    background-size: 300% 300%;
+    animation: gradientShift 14s ease infinite;
+}
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Shake (jawaban salah pada game) */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+.animate-shake { animation: shake 0.4s ease-in-out; }
+
+/* Floating (ikon melayang) */
+@keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+.animate-floaty { animation: floaty 4s ease-in-out infinite; }
+
+/* Loading screen: rumah + daun tumbuh */
+#app-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, #ecfdf5, #ffffff);
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#app-loader.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+#app-loader .leaf {
+    transform-origin: bottom center;
+    animation: leafGrow 1.6s ease-in-out infinite;
+}
+@keyframes leafGrow {
+    0% { transform: scale(0.2) rotate(-8deg); opacity: 0.3; }
+    50% { transform: scale(1) rotate(4deg); opacity: 1; }
+    100% { transform: scale(0.2) rotate(-8deg); opacity: 0.3; }
+}
+#app-loader .loader-ring {
+    animation: spin 1.1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* =========================================================
+ | Latar 3D form login: KARTU BERLAPIS MELAYANG
+ | Di belakang kartu login ada 2 kartu kaca jade yang di-offset &
+ | dimiringkan pada kedalaman berbeda (translateZ). Seluruh tumpukan
+ | dibungkus preserve-3d dan dimiringkan halus mengikuti kursor →
+ | lapisan parallax secara alami, kesan 3D nyata tapi tetap kalem.
+ | Lapisan pointer-events:none, form 100% bisa dipakai.
+ ========================================================= */
+.login-stage {
+    perspective: 1200px;
+    /* Ilustrasi warga (setengah kanan dari asset) sebagai background panel form.
+       Gambar sudah beralas putih, jadi cukup cover + alas putih. */
+    background-color: #ffffff;
+    background-image: url('/images/login-illustration.png');
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: cover;
+}
+
+.login-3d {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+/* Kartu login asli berada di depan (Z paling dekat). */
+.login-3d .login-card-3d {
+    position: relative;
+    z-index: 2;
+    transform: translateZ(0);
+}
+
+/* Kartu-kartu kaca di belakang. inset penuh + rounded samakan card-surface (1rem). */
+.login-3d .stack-layer {
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    pointer-events: none;
+}
+.login-3d .stack-mid {
+    z-index: 1;
+    transform: translateZ(-34px) translateY(12px) scale(0.965) rotate(2.6deg);
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 18px 40px -22px rgba(15, 61, 51, 0.35);
+    border: 1px solid rgba(16, 185, 129, 0.18);
+}
+.login-3d .stack-back {
+    z-index: 0;
+    transform: translateZ(-66px) translateY(26px) scale(0.925) rotate(-3.4deg);
+    background: linear-gradient(135deg, rgba(110, 231, 183, 0.55), rgba(16, 185, 129, 0.35));
+    box-shadow: 0 26px 60px -26px rgba(5, 150, 105, 0.5);
+}
+
+/* =========================================================
+ | Panel branding KIRI — komposisi 3D interaktif.
+ | Gradasi hijau hutan menyambung nuansa panel kanan; sebuah
+ | "preview app" dari kartu-kaca berlapis pada kedalaman Z
+ | berbeda melayang & miring mengikuti kursor (parallax nyata
+ | via preserve-3d + perspective). Idle: mengambang halus.
+ ========================================================= */
+.brand-panel {
+    perspective: 1500px;
+    background:
+        radial-gradient(130% 120% at 100% 0%, rgba(16, 185, 129, 0.30), transparent 55%),
+        linear-gradient(158deg, #0f3d33 0%, #0b332c 52%, #072a24 100%);
+}
+
+/* Sorotan cahaya lembut yang mengikuti posisi kursor. */
+.brand-spotlight {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(460px circle at var(--mx, 70%) var(--my, 30%),
+                rgba(52, 211, 153, 0.20), transparent 60%);
+    transition: background 0.18s ease-out;
+}
+
+/* Blob ambient blur agar latar tidak datar. */
+.brand-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(55px);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+.brand-blob-1 {
+    width: 340px; height: 340px; top: -90px; left: -70px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.55), transparent 70%);
+}
+.brand-blob-2 {
+    width: 380px; height: 380px; bottom: -130px; right: -90px;
+    background: radial-gradient(circle, rgba(5, 150, 105, 0.50), transparent 70%);
+}
+
+/* Grup 3D yang berputar mengikuti kursor. */
+.brand-3d {
+    position: relative;
+    width: 300px; height: 300px;
+    transform-style: preserve-3d;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+.brand-3d-float { animation: brand-bob 7s ease-in-out infinite; }
+@keyframes brand-bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
+
+/* Permukaan kaca dasar untuk emblem & chip. */
+.brand-3d .glass {
+    position: absolute;
+    background: linear-gradient(150deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 24px 50px -22px rgba(0, 0, 0, 0.55);
+}
+
+.brand-3d .glass-card {
+    position: absolute;
+    border-radius: 1.15rem;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 24px 50px -22px rgba(0, 0, 0, 0.6);
+}
+
+/* Kartu utama: ringkasan kas (kedalaman menengah). */
+.brand-3d .card-main {
+    left: 4%; top: 24%;
+    width: 260px; padding: 1.15rem 1.25rem;
+    transform: translateZ(48px);
+    z-index: 3;
+}
+/* Chip iuran (paling depan). */
+.brand-3d .card-iuran {
+    right: -10%; top: 4%;
+    padding: 0.6rem 0.85rem;
+    transform: translateZ(96px);
+    z-index: 4;
+}
+/* Kartu surat ber-QR (agak di belakang). */
+.brand-3d .card-surat {
+    left: -12%; bottom: 2%;
+    width: 210px; padding: 0.85rem 1rem;
+    transform: translateZ(18px);
+    z-index: 2;
+}
+/* Cincin dekoratif di kedalaman paling jauh. */
+.brand-3d .deco-ring {
+    position: absolute;
+    right: -14%; bottom: -8%;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 2px solid rgba(110, 231, 183, 0.35);
+    background: radial-gradient(circle at 30% 30%, rgba(52, 211, 153, 0.35), rgba(6, 95, 70, 0.12));
+    transform: translateZ(-44px);
+    z-index: 1;
+}
+
+/* Batang mini-sparkline pada kartu utama. */
+.spark-bar {
+    width: 8px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #6ee7b7, #10b981);
+}
+
+/* =========================================================
+ | Kartu "Masalah / Solusi" (welcome) dengan sorotan kursor.
+ | Tiap kartu punya lapisan `.spotlight` — radial-gradient yang
+ | mengikuti posisi kursor (via --mx/--my) dan menyala saat hover.
+ ========================================================= */
+.spot-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.spot-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 45px -24px rgba(15, 23, 42, 0.4);
+}
+.spot-card .spotlight {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%),
+                var(--spot, rgba(16, 185, 129, 0.22)), transparent 68%);
+}
+.spot-card:hover .spotlight { opacity: 1; }
+/* Tepi kartu ikut menyala tipis mengikuti kursor. */
+.spot-card:hover { box-shadow: 0 22px 45px -24px rgba(15, 23, 42, 0.4); }
+
+/* =========================================================
+ | Mockup HP untuk section "Cara kerja".
+ | Bezel gelap + layar terang; isi layar berganti mengikuti
+ | langkah aktif. Idle mengambang halus.
+ ========================================================= */
+.phone {
+    position: relative;
+    width: 280px;
+    max-width: 78vw;
+    aspect-ratio: 9 / 18;
+    border-radius: 2.75rem;
+    padding: 10px;
+    background: linear-gradient(160deg, #10241f, #05130f);
+    box-shadow: 0 45px 90px -35px rgba(15, 61, 51, 0.55),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.05);
+    animation: phone-float 6s ease-in-out infinite;
+}
+@keyframes phone-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+}
+.phone-screen {
+    position: relative;
+    width: 100%; height: 100%;
+    border-radius: 2.15rem;
+    overflow: hidden;
+    background: #f8fafc;
+}
+.phone-notch {
+    position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    width: 92px; height: 22px; border-radius: 999px;
+    background: #05130f; z-index: 30;
+}
+/* Tiap "layar" menumpuk penuh agar transisi antar langkah mulus. */
+.phone-page {
+    position: absolute; inset: 0;
+    padding: 2.6rem 1rem 1.1rem;
+    display: flex; flex-direction: column;
+}
+
+/* Tekstur titik-titik halus di banner CTA (memudar ke bawah). */
+.cta-card .cta-dots {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 28%, transparent 72%);
+    mask-image: radial-gradient(120% 90% at 50% 0%, #000 28%, transparent 72%);
+    opacity: 0.6;
+}
+
+/* Kilau cahaya yang menyapu banner secara periodik. */
+.cta-card .cta-shine {
+    position: absolute; top: 0; bottom: 0; left: -60%;
+    width: 45%;
+    pointer-events: none;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.10), transparent);
+    transform: skewX(-14deg);
+    animation: cta-shine 7s ease-in-out infinite;
+}
+@keyframes cta-shine {
+    0%        { left: -60%; }
+    55%, 100% { left: 140%; }
+}
+
+/* Sorotan kursor untuk banner CTA (glow putih mengikuti kursor). */
+.cta-card .cta-spot {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(440px circle at var(--mx, 50%) var(--my, 50%),
+                rgba(255, 255, 255, 0.18), transparent 60%);
+}
+.cta-card:hover .cta-spot { opacity: 1; }
+
+/* Underline animasi untuk tautan nav (melebar dari kiri saat hover). */
+.nav-link { position: relative; }
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -6px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover::after { transform: scaleX(1); }
+
+/* Hormati preferensi kurangi-gerak & perangkat low-end */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+    [data-reveal],
+    [data-reveal] .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
+    .login-3d { transform: none !important; }
+    .brand-3d, .brand-3d-float { transform: none !important; animation: none !important; }
+}
+
+/* PWA: item "Pasang Aplikasi" hanya muncul saat installable (beforeinstallprompt) */
+.pwa-install-item { display: none; }
+.pwa-installable .pwa-install-item { display: flex; }

@@ -1,0 +1,33 @@
+{
+    "name": "SAPA - Sistem Administrasi dan Pelayanan Antarwarga",
+    "short_name": "SAPA",
+    "description": "Aplikasi warga untuk kas transparan, iuran online, surat pengantar digital, pengumuman, dan lapor warga.",
+    "start_url": "/dashboard",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#f8fafc",
+    "theme_color": "#10b981",
+    "lang": "id",
+    "categories": ["government", "productivity", "social"],
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

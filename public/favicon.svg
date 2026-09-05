@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="SAPA">
+    <defs>
+        <linearGradient id="sapaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#22c55e"/>
+            <stop offset="1" stop-color="#15803d"/>
+        </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="13" fill="url(#sapaGrad)"/>
+    <!-- Atap rumah -->
+    <path d="M24 10 41 24.4a1.4 1.4 0 0 1-.9 2.5H7.9A1.4 1.4 0 0 1 7 24.4Z" fill="#ffffff"/>
+    <!-- Badan rumah -->
+    <rect x="12.5" y="25" width="23" height="13.6" rx="2.2" fill="#ffffff"/>
+    <!-- Tiga warga (komunitas) -->
+    <g fill="#16a34a">
+        <circle cx="19" cy="31.4" r="2.3"/>
+        <circle cx="24" cy="30" r="2.7"/>
+        <circle cx="29" cy="31.4" r="2.3"/>
+    </g>
+</svg>

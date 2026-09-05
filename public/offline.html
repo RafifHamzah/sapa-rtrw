@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Offline · SAPA</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;
+            background:linear-gradient(160deg,#ecfdf5 0%,#f8fafc 60%);color:#0f172a}
+        .card{max-width:26rem;text-align:center}
+        .mark{width:72px;height:72px;margin:0 auto 1.25rem;border-radius:20px;background:linear-gradient(180deg,#22c55e,#15803d);
+            display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -8px rgba(16,185,129,.5)}
+        .mark svg{width:40px;height:40px}
+        h1{font-size:1.4rem;font-weight:800;margin-bottom:.5rem}
+        p{color:#64748b;line-height:1.6;font-size:.95rem}
+        button{margin-top:1.5rem;border:0;cursor:pointer;background:#10b981;color:#fff;font-weight:700;
+            padding:.75rem 1.5rem;border-radius:14px;font-size:.95rem;box-shadow:0 8px 20px -6px rgba(16,185,129,.6)}
+        button:active{transform:scale(.97)}
+        .hint{margin-top:1rem;font-size:.8rem;color:#94a3b8}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="mark">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 10 41 24.4a1.4 1.4 0 0 1-.9 2.5H7.9A1.4 1.4 0 0 1 7 24.4Z" fill="#fff"/>
+                <rect x="12.5" y="25" width="23" height="13.6" rx="2.2" fill="#fff"/>
+            </svg>
+        </div>
+        <h1>Kamu sedang offline</h1>
+        <p>Sepertinya koneksi internet terputus. Periksa jaringan kamu, lalu coba muat ulang halaman.</p>
+        <button onclick="location.reload()">Coba Lagi</button>
+        <p class="hint">SAPA — Sistem Administrasi dan Pelayanan Antarwarga</p>
+    </div>
+</body>
+</html>

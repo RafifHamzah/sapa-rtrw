@@ -1,0 +1,23 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-CZ0q8BDS.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-D8X-hnmq.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/games/pilah-sampah-3d.js": {
+    "file": "assets/pilah-sampah-3d-BtdxMG3A.js",
+    "name": "pilah-sampah-3d",
+    "src": "resources/js/games/pilah-sampah-3d.js",
+    "isEntry": true
+  }
+}
