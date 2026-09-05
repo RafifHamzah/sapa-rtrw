@@ -12,7 +12,7 @@ _"Semua urusan warga, dalam satu sapa."_
 
 **Submission for ITECHNO CUP 2026 - Web Development**
 
-**By RafifHamzah**
+**By RafifHamzah, Alan Mifza Ibrahim & Fabian Alska Manuputty**
 
 </div>
 
@@ -449,6 +449,8 @@ Cakupan:     alur inti — auth & peran, keuangan (kas/iuran/Midtrans),
 | Nama | Peran | GitHub |
 |------|-------|--------|
 | **RafifHamzah** | Project Lead & Full Stack Developer | [@RafifHamzah](https://github.com/RafifHamzah) |
+| **Alan Mifza Ibrahim** | Developer | — |
+| **Fabian Alska Manuputty** | Developer | — |
 
 ---
 
@@ -460,7 +462,7 @@ Proyek ini dilisensikan di bawah [MIT License](LICENSE) — lihat file `LICENSE`
 
 <div align="center">
 
-**Made with ❤️ by RafifHamzah for ITECHNO CUP 2026**
+**Made with ❤️ by RafifHamzah, Alan Mifza Ibrahim & Fabian Alska Manuputty for ITECHNO CUP 2026**
 
 _SAPA — Semua urusan warga, dalam satu sapa._
 
