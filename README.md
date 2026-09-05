@@ -1,288 +1,467 @@
-# 🏘️ Platform Digital RT/RW
+<div align="center">
 
-> **Smart Sustainable Digital Solution for Inclusive Society**
-> Satu aplikasi untuk seluruh warga: kas transparan, iuran online, surat pengantar digital ber-QR, pengumuman, dan lapor warga.
+# SAPA
 
-<p align="center">
-  <img alt="Laravel" src="https://img.shields.io/badge/Laravel-13-FF2D20?logo=laravel&logoColor=white">
-  <img alt="Filament" src="https://img.shields.io/badge/Filament-5-F59E0B?logo=laravel&logoColor=white">
-  <img alt="Livewire" src="https://img.shields.io/badge/Livewire-4-FB70A9">
-  <img alt="Tailwind" src="https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss&logoColor=white">
-  <img alt="PHP" src="https://img.shields.io/badge/PHP-8.3%2B-777BB4?logo=php&logoColor=white">
-</p>
+### Sistem Administrasi dan Pelayanan Antarwarga — Platform Digital RT/RW
 
----
+_"Semua urusan warga, dalam satu sapa."_
 
-## 📖 Daftar Isi
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Site-success?style=for-the-badge)](https://sapa-rtrw-production.up.railway.app)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/RafifHamzah/sapa-rtrw)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-1. [Penjelasan Aplikasi](#-penjelasan-aplikasi)
-2. [Fitur Utama](#-fitur-utama)
-3. [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
-4. [Relevansi Tema & SDG](#-relevansi-tema--sdg)
-5. [Screenshot](#-screenshot)
-6. [Akun Demo](#-akun-demo)
-7. [Cara Instalasi](#-cara-instalasi)
-8. [Cara Penggunaan](#-cara-penggunaan)
-9. [Deployment](#-deployment)
-10. [Struktur & Arsitektur](#-struktur--arsitektur)
-11. [Checklist QA](#-checklist-qa-kesiapan-demo)
+**Submission for ITECHNO CUP 2026 - Web Development**
+
+**By RafifHamzah**
+
+</div>
 
 ---
 
-## 🎯 Penjelasan Aplikasi
+## 📋 Daftar Isi
+
+- [Tentang Proyek](#-tentang-proyek)
+- [Fitur Unggulan](#-fitur-unggulan)
+- [Demo & Screenshot](#-demo--screenshot)
+- [Teknologi](#-teknologi)
+- [Arsitektur Sistem](#-arsitektur-sistem)
+- [Instalasi & Setup](#-instalasi--setup)
+- [Penggunaan](#-penggunaan)
+- [API & Rute Penting](#-api--rute-penting)
+- [Testing](#-testing)
+- [Tim Pengembang](#-tim-pengembang)
+- [Lisensi](#-lisensi)
+
+---
+
+## 🎯 Tentang Proyek
 
 ### Latar Belakang
 
-Pengelolaan RT/RW di Indonesia masih banyak dilakukan secara manual dan menimbulkan masalah klasik:
+Pengelolaan RT/RW di Indonesia masih banyak dilakukan secara manual, dan menimbulkan masalah klasik yang berulang di hampir setiap lingkungan:
 
-- **Kas tidak transparan** — warga jarang tahu ke mana uang iuran mengalir; laporan keuangan hanya dibacakan sesekali di rapat.
+- **Kas tidak transparan** — warga jarang tahu ke mana uang iuran mengalir; laporan keuangan hanya dibacakan sesekali saat rapat.
+- **Iuran ribet & rawan salah catat** — pembayaran tunai dari rumah ke rumah memakan waktu dan sulit direkap.
 - **Informasi tercecer** — pengumuman tersebar di banyak grup WhatsApp dan mudah tenggelam.
-- **Birokrasi surat ribet** — untuk surat pengantar (domisili, SKTM, usaha) warga harus bolak-balik menemui pengurus.
-- **Iuran merepotkan** — pembayaran harus tunai dan bertemu bendahara, sering terlambat.
-- **Laporan warga tak jelas tindak lanjutnya** — keluhan lingkungan hilang tanpa kabar.
+- **Birokrasi surat berbelit** — untuk surat pengantar (domisili, SKTM, usaha) warga harus bolak-balik menemui pengurus.
+- **Aspirasi warga tidak tersalur** — keluhan (jalan rusak, sampah, keamanan) sering hanya jadi obrolan tanpa tindak lanjut yang terlacak.
 
-### Tujuan
+### Solusi yang Ditawarkan
 
-**Platform Digital RT/RW** mendigitalkan seluruh layanan RT/RW dalam satu aplikasi yang **transparan, cepat, dan inklusif**:
+**SAPA** menyatukan seluruh urusan warga ke dalam satu aplikasi web yang **inklusif, transparan, dan mudah dipakai semua kalangan**:
 
-- Membuka buku kas RT secara **real-time** kepada semua warga.
-- Memungkinkan **pembayaran iuran online** yang praktis.
-- Menyediakan **surat pengantar digital ber-QR** yang bisa diverifikasi publik.
-- Menyatukan **pengumuman** dan kanal **lapor warga** yang terlacak statusnya.
-- Ramah untuk **semua kalangan**, termasuk lansia (mode inklusif).
+- Kas RT ditampilkan **real-time & terbuka** untuk semua warga, lengkap dengan grafik.
+- Iuran bisa **dibayar online** lewat Midtrans, dengan tagihan otomatis dan status yang jelas.
+- Surat pengantar diajukan online dan terbit sebagai **PDF ber-QR** yang bisa diverifikasi publik — mencegah pemalsuan.
+- Pengumuman, laporan warga (dengan **timeline penanganan**), dan pelayanan lain terpusat di satu tempat.
+- Ditambah **gamifikasi**, **asisten AI (SAPA AI)**, **mini-game edukasi**, **Mode Inklusif** (perbesar teks & kontras), dan **PWA** yang bisa dipasang di HP layaknya aplikasi asli.
 
-Aplikasi memiliki **dua permukaan**:
+### Tujuan Proyek
 
-| Permukaan | Pengguna | Teknologi |
-|-----------|----------|-----------|
-| **Panel Admin** (`/admin`) | Super Admin & Pengurus | Filament (dengan Filament Shield untuk role & permission) |
-| **Aplikasi Warga** (`/`) | Warga | Blade + Livewire + Tailwind (mobile-first, responsif) |
+- 🎯 **Tujuan Utama**: Mendigitalkan administrasi & pelayanan RT/RW agar transparan, efisien, dan bisa diakses seluruh warga.
+- 📊 **Target Pengguna**: Warga (semua usia), pengurus RT/RW (ketua, bendahara, sekretaris), dan pihak yang memverifikasi surat.
+- 💡 **Value Proposition**: Satu platform terpadu yang menggabungkan **transparansi keuangan + layanan surat ber-QR + partisipasi warga (lapor & gamifikasi)** dengan pendekatan **inklusif** — selaras dengan **SDG 11: Kota & Permukiman yang Berkelanjutan**.
 
 ---
 
-## ✨ Fitur Utama
+## ✨ Fitur Unggulan
 
-### 1. 💰 Kas Transparan (keunggulan utama)
-Seluruh transaksi pemasukan & pengeluaran RT terbuka untuk **semua warga** (read-only), lengkap dengan **grafik arus kas bulanan** dan saldo real-time. Transparansi keuangan = kepercayaan warga.
+### Fitur Utama
 
-### 2. 🧾 Iuran Online (Midtrans)
-Warga melihat tagihan iuran (lunas/menunggak) dan membayar langsung lewat **Midtrans Snap**. Saat pembayaran berhasil, webhook memvalidasi *signature*, status iuran otomatis **lunas**, dan **satu baris pemasukan kas** tercatat otomatis — idempoten (tidak dobel walau webhook diulang).
+| Fitur | Deskripsi | Keunggulan |
+|-------|-----------|------------|
+| **Kas Transparan** | Buku kas RT (pemasukan/pengeluaran) tampil real-time untuk warga, lengkap dengan grafik & saldo. | Membangun kepercayaan lewat keterbukaan penuh — bukan sekadar laporan tahunan. |
+| **Iuran Online** | Generate tagihan otomatis + pembayaran via **Midtrans** (Snap), status Lunas/Belum terlacak. | Bayar tanpa antre; settlement idempoten & aman lewat verifikasi signature + webhook. |
+| **Surat Pengantar ber-QR** | Ajukan surat online → pengurus setujui → terbit **PDF dengan QR verifikasi publik**. | Nomor surat anti-dobel (race-safe) & keaslian bisa dicek siapa pun tanpa login. |
+| **Lapor Warga** | Warga melaporkan masalah (foto + lokasi); pengurus menangani dengan **timeline status**. | Aspirasi tercatat & transparan, tidak lagi hilang di grup chat. |
 
-### 3. 📄 Surat Pengantar Digital + QR Verifikasi
-Warga mengajukan surat (Domisili, SKTM, Pengantar Usaha) dengan field tambahan dinamis. Pengurus menyetujui → sistem meng-generate **nomor surat otomatis** (`001/DOM/RT04/2026`, aman dari *race condition*), **PDF ber-kop**, dan **QR code**. Siapa pun bisa memindai QR / membuka `/verify/{token}` untuk **memastikan keaslian surat** — tanpa login.
+### Fitur Tambahan
 
-### 4. 📣 Pengumuman
-Feed pengumuman dengan kategori & **prioritas pin**, mendukung penjadwalan tayang (`published_at`) dan lampiran. Bisa dibagikan ke **WhatsApp**.
-
-### 5. 🚨 Lapor Warga
-Warga melaporkan masalah lingkungan (foto + kategori + lokasi). Pengurus mengubah status **reported → in_progress → resolved**, dan warga bisa **melacak timeline penanganan**. Pengurus juga menerima **notifikasi in-app** saat ada laporan baru.
-
-### 6. ♿ Mode Inklusif (pembeda tema)
-Toggle satu klik untuk **memperbesar teks & menaikkan kontras** — nyaman bagi warga lanjut usia atau berkebutuhan khusus. Preferensi tersimpan di perangkat.
-
-### 7. 🎮 Gamifikasi + Belajar Sambil Bermain
-Setiap aktivitas (bayar iuran, ajukan surat, lapor warga) memberi **XP**; warga **naik level**, membuka **8 badge** (Warga Teladan, Rajin Bayar Iuran, dll), dan masuk **papan peringkat**. Ada halaman **Profil & Prestasi** dan **3 mini-game edukasi** — "Pilah Sampah 3D" (Three.js/WebGL, drag & drop), "Kuis Administrasi", dan "Tebak Jenis Surat" (pilihan ganda) — yang juga memberi XP (dibatasi harian per game). XP dihitung idempoten lewat observer — mendorong partisipasi & gotong royong digital.
-
-### 8. 🤖 SAPA AI (asisten FAQ)
-Chatbot mengambang yang menjawab pertanyaan RT/RW **dan terhubung data asli** ("iuran saya berapa?", "saldo kas RT", "status surat saya") dengan tombol aksi cepat. Berbasis intent (tanpa biaya API), mudah di-upgrade ke LLM.
-
-### 9. ✨ Polish Visual & Aksesibilitas
-Glassmorphism, animasi halus + scroll reveal, **confetti** saat pembayaran berhasil, **toast** notification, **FAB** aksi cepat, dan **loading screen** — semua menghormati `prefers-reduced-motion` demi perangkat low-end.
+- **Gamifikasi** — Poin XP, level, lencana, dan papan peringkat warga teraktif untuk mendorong partisipasi.
+- **SAPA AI** — Asisten FAQ yang menjawab pertanyaan warga sekaligus menarik data nyata (tagihan saya, saldo kas, status surat, dll).
+- **Mini-Game Edukasi** — 3 permainan: *Pilah Sampah 3D* (Three.js, drag & drop), *Kuis Administrasi*, dan *Tebak Jenis Surat*.
+- **Mode Inklusif & PWA** — Perbesar teks + kontras tinggi untuk aksesibilitas, dan aplikasi bisa **di-install di HP** (installable, offline-ready).
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## 📸 Demo & Screenshot
 
-| Teknologi | Versi | Peruntukan dalam proyek ini |
-|-----------|-------|------------------------------|
-| **Laravel** | 13 | Framework backend utama: routing, Eloquent ORM, migration, validasi, dan seluruh *business logic*. |
-| **PHP** | 8.3+ | Bahasa pemrograman; memakai *backed enum* untuk semua status (UserStatus, DuesStatus, dll). |
-| **Filament** | 5 | Membangun **panel admin pengurus** (`/admin`): Resource CRUD, tabel, form, action, dan **widget dashboard** (saldo & grafik). |
-| **Filament Shield** (bezhanSalleh) | 4 | **Role & permission** berbasis Spatie: role `super_admin`, `pengurus`, `warga` beserta permission per-resource + policy. |
-| **Spatie Laravel Permission** | 8 | Mesin RBAC di balik Filament Shield (relasi role–permission–user). |
-| **Livewire** | 4 | Komponen interaktif reaktif di sisi warga, khususnya **halaman Iuran** (daftar tagihan + tombol bayar yang memicu Midtrans Snap). |
-| **Tailwind CSS** | 3 | *Design system* aplikasi warga: palet brand, komponen reusable (card, button, badge, empty state), responsif mobile-first. |
-| **Alpine.js** | 3 | Interaktivitas ringan di Blade: menu, dropdown, field surat dinamis, toggle Mode Inklusif. |
-| **Midtrans PHP SDK** | 2 | **Payment gateway** iuran online (Snap): pembuatan token & verifikasi *signature* webhook (mode Sandbox). |
-| **barryvdh/laravel-dompdf** | 3 | **Generate PDF surat** murni PHP (tanpa headless Chrome) — mudah di-deploy di hosting apa pun. |
-| **simplesoftwareio/simple-qrcode** | 4 | Membuat **QR code** verifikasi (format SVG inline, tanpa perlu ekstensi imagick). |
-| **Laravel Breeze** | 2 (stack Blade) | Scaffolding autentikasi warga (register, login, reset password) yang kemudian di-*restyle* sesuai branding. |
-| **canvas-confetti** | 1 | Efek **confetti** saat pembayaran berhasil (dengan penghormatan `prefers-reduced-motion`). |
-| **Three.js** | 0.18x | Mesin **3D/WebGL** untuk mini-game edukasi "Pilah Sampah 3D" (scene, drag & drop, animasi). Bundle terpisah, hanya dimuat di halaman game. |
-| **Vite** | 8 | *Bundler* aset front-end (CSS/JS). |
-| **PHPUnit** | 12 | *Automated testing* — 88 test mencakup auth, iuran+Midtrans, surat+QR, pengumuman, lapor warga, dan gamifikasi. |
+### Live Demo
 
-> Basis data default **SQLite** (nol-konfigurasi untuk demo). Dapat diganti ke **MySQL/PostgreSQL** lewat `.env` tanpa perubahan kode.
+🔗 **[Kunjungi Website](https://sapa-rtrw-production.up.railway.app)**
 
----
+> Login demo tersedia di bagian [Penggunaan](#-penggunaan) — akun warga & pengurus siap dicoba.
 
-## 🌍 Relevansi Tema & SDG
+### Screenshot Aplikasi
 
-**Tema: _Smart Sustainable Digital Solution for Inclusive Society_**
+<div align="center">
 
-| Aspek | Bagaimana aplikasi menjawabnya |
-|-------|-------------------------------|
-| **Smart** | Otomatisasi penuh: penomoran surat, pencatatan kas dari pembayaran, verifikasi QR, notifikasi laporan. |
-| **Sustainable** | *Paperless* (surat & laporan digital), PDF pure-PHP hemat sumber daya, mengurangi mobilitas fisik warga. |
-| **Digital Solution** | Menggantikan proses manual RT/RW (buku kas, arsip surat, grup chat) dengan satu platform terpadu. |
-| **Inclusive Society** | **Mode Inklusif** (teks besar & kontras tinggi) untuk lansia/difabel; transparansi kas menumbuhkan kepercayaan; UI sederhana lintas usia. |
+<img src="docs/screenshots/01-landing.png" alt="Landing Page" width="800"/>
+<p><em>Landing Page — Tampilan utama SAPA</em></p>
 
-### 🎯 SDG 11 — Sustainable Cities and Communities
+<img src="docs/screenshots/02-dashboard.png" alt="Dashboard Warga" width="800"/>
+<p><em>Dashboard Warga — Ringkasan kas, tagihan, prestasi & layanan cepat</em></p>
 
-Aplikasi mendukung **SDG 11: Kota dan Permukiman yang Berkelanjutan** pada unit terkecil masyarakat (RT/RW):
+<img src="docs/screenshots/08-admin.png" alt="Panel Admin" width="800"/>
+<p><em>Panel Admin (Filament) — Ringkasan komunitas, distribusi dana & keuangan</em></p>
 
-- **11.3** — Urbanisasi inklusif & partisipatif: kanal lapor warga + transparansi kas mendorong partisipasi warga dalam tata kelola lingkungan.
-- **11.a** — Memperkuat tata kelola komunitas melalui administrasi digital yang akuntabel.
+<img src="docs/screenshots/03-kas.png" alt="Kas Transparan" width="800"/>
+<p><em>Kas Transparan — Buku kas real-time dengan grafik</em></p>
 
-Turut mendukung **SDG 16 (Institusi yang akuntabel & transparan)** lewat buku kas terbuka dan jejak setiap transaksi.
+<img src="docs/screenshots/05-surat.png" alt="Surat Pengantar" width="800"/>
+<p><em>Surat Pengantar — Ajuan surat & unduh PDF ber-QR</em></p>
+
+</div>
+
+> Screenshot lain (iuran + Midtrans, verifikasi QR publik, lapor warga, mode inklusif) tersedia di folder [`docs/screenshots/`](docs/screenshots).
 
 ---
 
-## 📸 Screenshot
+## 🛠 Teknologi
 
-> Tangkapan layar aktual (retina 2×) dari data demo — tersimpan di `docs/screenshots/`.
+### Tech Stack
 
-| Halaman | Screenshot |
-|---------|-----------|
-| **Landing Page** | ![Landing](docs/screenshots/01-landing.png) |
-| **Dashboard Warga** | ![Dashboard](docs/screenshots/02-dashboard.png) |
-| **Kas Transparan (grafik)** | ![Kas](docs/screenshots/03-kas.png) |
-| **Iuran Saya + Midtrans Snap** | ![Iuran](docs/screenshots/04-iuran.png) |
-| **Surat + Download PDF** | ![Surat](docs/screenshots/05-surat.png) |
-| **Verifikasi QR Publik** | ![Verify](docs/screenshots/06-verify.png) |
-| **Lapor Warga (timeline)** | ![Lapor](docs/screenshots/07-lapor.png) |
-| **Panel Admin (Filament)** | ![Admin](docs/screenshots/08-admin.png) |
-| **Mode Inklusif** | ![Inklusif](docs/screenshots/09-inklusif.png) |
+#### Frontend
+```
+Templating   : Laravel Blade
+Interaktif   : Livewire v4 (single-file components) + Alpine.js v3
+UI / Styling : Tailwind CSS v3 + design system komponen sendiri
+3D / Visual  : Three.js (mini-game Pilah Sampah), canvas-confetti
+Build Tool   : Vite v8 (laravel-vite-plugin)
+```
+
+#### Backend
+```
+Bahasa       : PHP 8.4
+Framework    : Laravel v13
+Admin Panel  : Filament v5 (+ Filament Shield untuk RBAC)
+Database     : SQLite (default) / MySQL — kompatibel keduanya
+Auth         : Laravel Breeze + Spatie Permission + Google OAuth (Socialite)
+Pembayaran   : Midtrans PHP SDK (Snap, sandbox)
+Dokumen      : barryvdh/laravel-dompdf (PDF) + simple-qrcode (QR SVG)
+```
+
+#### DevOps & Tools
+```
+Deployment   : Railway (via Dockerfile, PHP 8.4)
+Container    : Docker
+Version Ctrl : Git + GitHub
+Testing      : PHPUnit (104 test)
+PWA          : Web App Manifest + Service Worker (offline-ready)
+```
+
+### Alasan Pemilihan Teknologi
+
+| Teknologi | Alasan Pemilihan |
+|-----------|------------------|
+| **Laravel 13** | Ekosistem matang, keamanan bawaan (CSRF, enkripsi, hashing), dan cocok untuk aplikasi berbasis data & peran yang kompleks. |
+| **Filament v5** | Membangun panel admin lengkap (CRUD, tabel, filter, aksi) dengan cepat, plus RBAC lewat Filament Shield — hemat waktu tanpa mengorbankan kualitas. |
+| **Livewire v4 + Alpine** | Interaktivitas ala SPA (bayar iuran, cek status) tanpa membangun API + frontend terpisah — lebih ringkas dan tetap SEO-friendly. |
+| **Midtrans** | Payment gateway populer di Indonesia; mendukung banyak metode bayar & punya sandbox untuk demo. |
+| **Three.js** | Mewujudkan mini-game *Pilah Sampah* yang benar-benar 3D & interaktif (drag-and-drop) untuk pengalaman edukatif yang menarik. |
+
+### Dependencies Utama
+
+```json
+{
+  "require": {
+    "php": "^8.4",
+    "laravel/framework": "^13.0",
+    "filament/filament": "^5.7",
+    "livewire/livewire": "^4.3",
+    "bezhansalleh/filament-shield": "^4.3",
+    "spatie/laravel-permission": "^8.3",
+    "midtrans/midtrans-php": "^2.6",
+    "barryvdh/laravel-dompdf": "^3.1",
+    "simplesoftwareio/simple-qrcode": "^4.2",
+    "laravel/socialite": "^5.30"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.1",
+    "alpinejs": "^3.4",
+    "three": "^0.185",
+    "canvas-confetti": "^1.9",
+    "vite": "^8.0"
+  }
+}
+```
 
 ---
 
-## 🔑 Akun Demo
+## 🏗 Arsitektur Sistem
 
-Semua akun memakai kata sandi: **`password`**
+### System Architecture
+
+```mermaid
+flowchart TD
+    subgraph Client["👥 Pengguna"]
+        W["Warga (PWA / Browser)"]
+        P["Pengurus RT/RW"]
+        V["Publik (verifikasi QR)"]
+    end
+
+    subgraph App["🖥️ Aplikasi Laravel (SAPA)"]
+        R["Routing & Middleware<br/>(auth, verified.resident, RBAC)"]
+        WA["Aplikasi Warga<br/>(Blade + Livewire)"]
+        AP["Panel Admin<br/>(Filament + Shield)"]
+        SV["Services<br/>(Midtrans, Letter, Complaint,<br/>Gamification, Chatbot)"]
+    end
+
+    subgraph Data["🗄️ Data & Layanan"]
+        DB[("Database<br/>SQLite / MySQL")]
+        ST["Storage<br/>(PDF surat, foto laporan)"]
+        MT["Midtrans<br/>(Payment Gateway)"]
+        GO["Google OAuth"]
+    end
+
+    W --> R
+    P --> R
+    V --> R
+    R --> WA & AP
+    WA & AP --> SV
+    SV --> DB & ST
+    SV <-->|Snap + Webhook| MT
+    R <-->|Login| GO
+```
+
+### Database Schema
+
+Entitas inti dan relasinya (disederhanakan):
+
+```mermaid
+erDiagram
+    RT ||--o{ FAMILY : memiliki
+    FAMILY ||--o{ RESIDENT : beranggotakan
+    RESIDENT |o--|| USER : "tertaut (opsional)"
+    USER }o--o{ ROLE : "punya peran"
+    FAMILY ||--o{ DUES : ditagih
+    DUES ||--o{ DUES_PAYMENT : dibayar
+    TRANSACTION }o--|| TRANSACTION_CATEGORY : dikategorikan
+    RESIDENT ||--o{ LETTER_REQUEST : mengajukan
+    LETTER_TYPE ||--o{ LETTER_REQUEST : jenis
+    USER ||--o{ COMPLAINT : melaporkan
+    COMPLAINT ||--o{ COMPLAINT_UPDATE : "timeline"
+    USER ||--o{ XP_LOG : mendapat
+    USER ||--o{ USER_BADGE : meraih
+```
+
+> Skema lengkap tersedia di [`docs/database-schema.md`](docs/database-schema.md).
+
+### Folder Structure
+
+```
+sapa-rtrw/
+├── app/
+│   ├── Enums/                 # Backed enums (status, kategori) + HasLabel/HasColor
+│   ├── Filament/              # Panel admin: Resources, Widgets, Schemas
+│   ├── Http/Controllers/      # Controller aplikasi warga
+│   ├── Models/                # Eloquent models
+│   ├── Observers/             # Observer (dues payment, complaint)
+│   ├── Policies/              # Kebijakan otorisasi (Shield)
+│   ├── Providers/             # Service providers
+│   ├── Services/              # Logika bisnis (Midtrans, Letter, Gamification, Chatbot)
+│   └── Support/               # Helper global (rupiah())
+├── database/
+│   ├── migrations/            # Skema database
+│   ├── seeders/               # ShieldSeeder (RBAC) + DemoSeeder (data demo)
+│   └── factories/
+├── resources/
+│   ├── views/                 # Blade: layouts, komponen UI, halaman warga
+│   ├── js/                    # Alpine, game Three.js, confetti
+│   └── css/                   # Tailwind + design system
+├── routes/                    # web.php, auth.php
+├── tests/                     # PHPUnit (Feature & Unit)
+├── docs/screenshots/          # Tangkapan layar
+├── public/                    # Entry point, aset build, manifest & service worker (PWA)
+├── Dockerfile                 # Image produksi (Railway)
+└── DEPLOY.md                  # Panduan deployment
+```
+
+---
+
+## ⚙ Instalasi & Setup
+
+### Prerequisites
+
+Pastikan sudah terpasang:
+- **PHP** 8.4+ (ekstensi: `mbstring`, `intl`, `pdo_sqlite`, `gd`, `zip`, `bcmath`, `curl`, `fileinfo`)
+- **Composer** 2.x
+- **Node.js** 18+ & **npm** (untuk build aset)
+- **Git**
+
+### Langkah Instalasi
+
+#### 1️⃣ Clone Repository
+```bash
+git clone https://github.com/RafifHamzah/sapa-rtrw.git
+cd sapa-rtrw
+```
+
+#### 2️⃣ Install Dependencies
+```bash
+composer install
+npm install
+```
+
+#### 3️⃣ Setup Environment
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+Isi variabel penting di `.env` (Midtrans & Google opsional untuk demo dasar):
+```env
+APP_NAME=SAPA
+APP_URL=http://localhost:8000
+DB_CONNECTION=sqlite
+
+# Opsional — pembayaran & login Google
+MIDTRANS_SERVER_KEY=
+MIDTRANS_CLIENT_KEY=
+MIDTRANS_MERCHANT_ID=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_REDIRECT_URI=http://localhost:8000/auth/google/callback
+```
+
+#### 4️⃣ Setup Database
+```bash
+touch database/database.sqlite
+php artisan migrate --seed
+```
+> `migrate --seed` menjalankan `ShieldSeeder` (peran & izin) lalu `DemoSeeder` (1 RT, 14 KK/37 warga, pengurus, kas, surat, laporan, dll).
+
+#### 5️⃣ Build Aset & Jalankan
+```bash
+npm run build          # atau `npm run dev` untuk mode pengembangan
+php artisan serve
+```
+Aplikasi berjalan di `http://localhost:8000`.
+
+> Untuk deployment produksi (Railway/VPS), lihat panduan lengkap di **[DEPLOY.md](DEPLOY.md)**.
+
+---
+
+## 🚀 Penggunaan
+
+### Menjalankan Aplikasi
+```bash
+php artisan serve      # server pengembangan
+npm run dev            # Vite (hot reload aset)
+php artisan test       # jalankan seluruh test
+```
+
+### Akun Demo
+
+Semua akun memakai password: **`password`**
 
 | Peran | Email | Akses |
 |-------|-------|-------|
-| **Super Admin** | `admin@rtrw.test` | Panel `/admin` — akses penuh |
-| **Pengurus (Ketua)** | `pengurus@rtrw.test` | Panel `/admin` — kelola kas, iuran, surat, pengumuman, laporan |
-| **Warga** | `warga@rtrw.test` | Aplikasi warga `/` — sudah terverifikasi, punya tagihan & surat |
+| Super Admin | `admin@rtrw.test` | Panel admin penuh (`/admin`) |
+| Pengurus (Bendahara) | `bendahara@rtrw.test` | Panel admin (tanpa kelola peran) |
+| Warga | `warga@rtrw.test` | Aplikasi warga (`/dashboard`) |
+| Warga lain | `warga2@rtrw.test` … `warga8@rtrw.test` | Aplikasi warga |
 
-Akun tambahan untuk mendemokan alur verifikasi warga & peran pengurus:
+### User Guide
 
-| Peran | Email | Status |
-|-------|-------|--------|
-| Pengurus (Bendahara) | `bendahara@rtrw.test` | aktif |
-| Pengurus (Sekretaris) | `sekretaris@rtrw.test` | aktif |
-| Warga (menunggu) | `pending@rtrw.test` | **pending** — untuk diverifikasi pengurus |
-| Warga (ditolak) | `ditolak@rtrw.test` | **rejected** |
-| Warga lain (leaderboard) | `warga2@rtrw.test` … `warga8@rtrw.test` | aktif, punya XP & badge berbeda-beda |
+#### Untuk Warga
+1. **Login** di halaman utama menggunakan akun warga (atau daftar & tunggu verifikasi pengurus).
+2. **Lihat Kas** transparan RT beserta grafik pemasukan/pengeluaran.
+3. **Bayar Iuran** pada menu *Iuran* → *Bayar* (Midtrans Snap) → status otomatis jadi Lunas.
+4. **Ajukan Surat** pada menu *Surat*, lalu unduh PDF ber-QR setelah disetujui.
+5. **Lapor Warga** untuk mengirim keluhan (foto + lokasi) dan pantau timeline penanganannya.
+6. **SAPA AI, Prestasi & Mini-Game** dapat diakses dari menu profil.
 
----
-
-## ⚙️ Cara Instalasi
-
-### Prasyarat
-- PHP **8.3+** (ekstensi: `gd`, `dom`, `mbstring`, `sqlite3`)
-- Composer 2
-- Node.js 20+ & npm
-
-### Langkah
-
-```bash
-# 1. Clone repositori
-git clone <url-repositori> rtrw
-cd rtrw
-
-# 2. Install dependency PHP
-composer install
-
-# 3. Install dependency & build aset front-end
-npm install
-npm run build
-
-# 4. Siapkan environment
-cp .env.example .env
-php artisan key:generate
-
-# 5. Siapkan database SQLite (default)
-touch database/database.sqlite
-
-# 6. Migrasi + isi data demo yang kaya
-php artisan migrate:fresh --seed
-
-# 7. Symlink storage (agar foto & PDF bisa diakses publik)
-php artisan storage:link
-```
-
-> **Midtrans (opsional untuk demo pembayaran):** daftar di [dashboard.midtrans.com](https://dashboard.midtrans.com) (pilih environment **Sandbox**), lalu isi `MIDTRANS_SERVER_KEY`, `MIDTRANS_CLIENT_KEY`, dan `MIDTRANS_MERCHANT_ID` di `.env`. Tanpa kunci, seluruh fitur lain tetap berjalan.
+#### Untuk Pengurus
+1. **Akses Panel Admin** di `/admin` menggunakan akun `admin@` atau `bendahara@`.
+2. **Kelola Keuangan** (buku kas, kategori, iuran, pembayaran) dan lihat ringkasan di dashboard.
+3. **Proses Surat** (setujui/tolak) — nomor & PDF ber-QR dibuat otomatis.
+4. **Tangani Laporan** warga dengan memperbarui status (tercatat di timeline).
+5. **Kelola Data Warga & KK** serta pengumuman.
 
 ---
 
-## 🚀 Cara Penggunaan
+## 📚 API & Rute Penting
 
-### Menjalankan (development)
+SAPA adalah aplikasi web server-rendered (Blade + Livewire), sehingga sebagian besar interaksi terjadi lewat halaman. Berikut endpoint HTTP yang paling relevan:
 
-```bash
-# Terminal 1 — server aplikasi
-php artisan serve
-
-# Terminal 2 — Vite (hot reload aset)
-npm run dev
+### Rute Publik (tanpa login)
+```http
+GET  /                         # Landing page
+GET  /verify/{qr_token}        # Verifikasi keaslian surat via QR (publik)
+POST /midtrans/callback        # Webhook notifikasi pembayaran Midtrans
 ```
 
-Buka **http://localhost:8000**.
+### Autentikasi
+```http
+GET  /login                    # Halaman login
+POST /login                    # Proses login
+GET  /auth/google/redirect     # Mulai login Google
+GET  /auth/google/callback     # Callback OAuth Google
+POST /logout                   # Logout
+```
 
-- Aplikasi warga: **http://localhost:8000**
-- Panel admin: **http://localhost:8000/admin**
-- Verifikasi surat publik: **http://localhost:8000/verify/{qr_token}**
+### Fitur Warga (perlu login + terverifikasi)
+```http
+GET  /dashboard                # Beranda warga
+GET  /kas                      # Kas transparan
+GET  /iuran                    # Daftar & pembayaran iuran
+POST /dues/{dues}/pay          # Buat transaksi pembayaran (Snap)
+GET  /letters                  # Daftar & ajuan surat
+GET  /letters/{letter}/download# Unduh PDF surat ber-QR
+GET  /complaints               # Lapor warga
+POST /assistant/ask            # Tanya ke SAPA AI (JSON)
+POST /game/{game}/complete     # Kirim skor mini-game (XP)
+```
 
-### Alur demo yang disarankan
-
-1. Buka **landing page**, klik _Masuk_.
-2. Login sebagai **warga** (`warga@rtrw.test`) → jelajahi Dashboard, **Kas Transparan** (grafik), **Iuran** (klik Bayar → Midtrans Snap), **Surat** (unduh PDF), **Pengumuman**, **Lapor Warga**.
-3. Aktifkan **Mode Inklusif** (ikon geser di kanan atas) untuk memperlihatkan aksesibilitas.
-4. Buka PDF surat yang sudah disetujui, **pindai QR**-nya → halaman verifikasi publik muncul.
-5. Login sebagai **pengurus** (`pengurus@rtrw.test`) di `/admin` → setujui surat pending, ubah status laporan, generate tagihan iuran massal.
-
-### Menjalankan test
-
-```bash
-php artisan test
+### Panel Admin
+```http
+GET  /admin                    # Dashboard pengurus (Filament)
+GET  /admin/login              # Login panel admin
 ```
 
 ---
 
-## ☁️ Deployment
+## 🧪 Testing
 
-Lihat panduan lengkap di **[DEPLOY.md](DEPLOY.md)**.
+Proyek diuji menggunakan **PHPUnit** dengan database SQLite in-memory (`RefreshDatabase`).
 
-> ⚠️ **PENTING:** Laravel adalah aplikasi **server-side (PHP + database)**. **Netlify & Vercel TIDAK cocok** untuk menjalankan backend Laravel (keduanya untuk situs statis/JS). Gunakan **Railway, Render, Laravel Cloud, atau VPS**. Detail langkah ada di `DEPLOY.md`.
+### Running Tests
+```bash
+php artisan test               # seluruh test
+php artisan test --filter=WargaPanelTest   # test tertentu
+```
 
----
+### Hasil Test
+```
+Tests:       104 passed (325 assertions)
+Framework:   PHPUnit
+Cakupan:     alur inti — auth & peran, keuangan (kas/iuran/Midtrans),
+             surat ber-QR & verifikasi, lapor warga, gamifikasi,
+             CRUD data warga/KK, serta keamanan akses per-peran.
+```
 
-## 🏗️ Struktur & Arsitektur
-
-- **Enums** (`app/Enums`) — seluruh status memakai PHP *backed enum* (`HasLabel` + `HasColor` untuk badge konsisten).
-- **Services** (`app/Services`) — logika inti terisolasi & teruji: `MidtransService`, `LetterService`, `ComplaintService`, `DuesGenerator`.
-- **Observers** (`app/Observers`) — efek samping otomatis & idempoten: `DuesPaymentObserver` (settle iuran → kas), `ComplaintObserver` (timeline + notifikasi).
-- **Filament Resources** (`app/Filament`) — panel pengurus + widget.
-- **Livewire** (`resources/views/components/⚡*`) — komponen warga interaktif.
-- **Design system** (`resources/views/components/ui`) — komponen Blade reusable.
-- **Skema database** — didokumentasikan di [`docs/database-schema.md`](docs/database-schema.md).
-
----
-
-## ✅ Checklist QA (Kesiapan Demo)
-
-- [x] `php artisan migrate:fresh --seed` mengisi data demo yang kaya (14 KK, 37 warga, 84 iuran, 86 transaksi, surat 3 status, 4 laporan, XP & badge terisi).
-- [x] 88 *automated test* lulus (`php artisan test`).
-- [x] Akun demo (super_admin, pengurus, warga) berfungsi.
-- [x] Aplikasi warga responsif di HP & desktop.
-- [x] Mode Inklusif berfungsi (teks membesar + kontras).
-- [ ] **(Produksi)** Midtrans Sandbox key terpasang & webhook `https://<domain>/midtrans/callback` teruji.
-- [ ] **(Produksi)** `/verify/{token}` dapat diakses publik di domain live (HTTPS).
-- [ ] **(Produksi)** `APP_URL` = domain HTTPS produksi (memastikan URL QR benar).
-- [ ] **(Produksi)** Screenshot fitur utama dilampirkan di `docs/screenshots/`.
+> Contoh proteksi yang diuji: warga tidak bisa mengakses `/admin` (403), pembayaran memverifikasi signature Midtrans, NIK tersimpan terenkripsi, dan nomor surat tidak pernah dobel.
 
 ---
 
-<p align="center">Dibuat dengan ❤️ untuk warga — Platform Digital RT/RW</p>
+## 👥 Tim Pengembang
+
+| Nama | Peran | GitHub |
+|------|-------|--------|
+| **RafifHamzah** | Project Lead & Full Stack Developer | [@RafifHamzah](https://github.com/RafifHamzah) |
+
+---
+
+## 📄 Lisensi
+
+Proyek ini dilisensikan di bawah [MIT License](LICENSE) — lihat file `LICENSE` untuk detail lebih lanjut.
+
+---
+
+<div align="center">
+
+**Made with ❤️ by RafifHamzah for ITECHNO CUP 2026**
+
+_SAPA — Semua urusan warga, dalam satu sapa._
+
+</div>
