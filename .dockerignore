@@ -1,0 +1,11 @@
+.git
+.github
+node_modules
+vendor
+tests
+.env
+.env.*
+*.md
+database/*.sqlite
+storage/logs/*
+.DS_Store
