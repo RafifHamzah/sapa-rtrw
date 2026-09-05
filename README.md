@@ -448,9 +448,9 @@ Cakupan:     alur inti — auth & peran, keuangan (kas/iuran/Midtrans),
 
 | Nama | Peran | GitHub |
 |------|-------|--------|
-| **RafifHamzah** | Project Lead & Full Stack Developer | [@RafifHamzah](https://github.com/RafifHamzah) |
-| **Alan Mifza Ibrahim** | Developer | — |
-| **Fabian Alska Manuputty** | Developer | — |
+| **RafifHamzah** | Project Lead & Backend Developer | [@RafifHamzah](https://github.com/RafifHamzah) |
+| **Alan Mifza Ibrahim** | Frontend Developer | — |
+| **Fabian Alska Manuputty** | Frontend Developer | — |
 
 ---
 
