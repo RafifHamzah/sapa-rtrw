@@ -57,7 +57,8 @@
     <table style="width: 100%; margin-top: 10px;">
         <tr>
             <td style="width: 130px;" class="qr-box">
-                {!! $qrSvg !!}
+                {{-- QR sebagai <img> data-URI: dompdf gagal render SVG inline (prolog <?xml>). --}}
+                <img src="data:image/svg+xml;base64,{{ base64_encode($qrSvg) }}" style="width: 110px; height: 110px;" alt="QR verifikasi">
                 <div>Pindai untuk verifikasi</div>
             </td>
             <td style="vertical-align: bottom; font-size: 10px; color: #444;">
